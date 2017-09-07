@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/FottyM/forum_api.svg?token=ezxbwzx4yzRF7YSKWEAV&branch=master)](https://travis-ci.com/FottyM/forum_api)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
