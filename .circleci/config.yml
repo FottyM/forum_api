@@ -1,61 +1,41 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/forum_api
     docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.4.1-node-browsers
+      - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
-          PGHOST: 127.0.0.1
-#          DATABASE_URL: postgres://forum_api@127.0.0.1/forum_api_test
-
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/postgres:9.6-alpine
-        POSTGRES_DB: forum_api_test
-#        POSTGRES_USER: forum_api
-
-
-    working_directory: ~/forum_api
-
+      - image: circleci/postgres:9.4.12-alpine
     steps:
       - checkout
 
-      # Download and cache dependencies
+      # Restore bundle cache
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
 
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --without development --jobs=4 --retry=3 --path vendor/bundle
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
 
+      # Store bundle cache
       - save_cache:
+          key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - vendor/bundle
 
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
-      # run tests!
-      - run:
-          name: run tests
-          command: |
-            bundle exec rspec --format progress \
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec --profile 10 \
                             --format RspecJunitFormatter \
-                            --out /tmp/test-results/rspec.xml \
-                            --format progress
+                            --out test_results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      # collect reports
+      # Save test results for timing analysis
       - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          path: test_results
