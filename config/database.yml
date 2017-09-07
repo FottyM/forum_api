@@ -1,0 +1,23 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: forum_api_development
+
+
+test:
+  <<: *default
+  database: forum_api_test
+
+
+production:
+  <<: *default
+  database: forum_api_production
+  username: forum_api
+  password: <%= ENV['FORUM_API_DATABASE_PASSWORD'] %>
