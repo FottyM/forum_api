@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    parallelism: 2
     working_directory: ~/forum_api
     docker:
       - image: circleci/ruby:2.4.1-node
