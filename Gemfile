@@ -16,6 +16,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 end
 
+
 group :test do
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
@@ -31,3 +32,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Todo: Faker should be put back in test and dev at the end because it shouldn't be used in production
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
+
+gem 'rack-cors'
