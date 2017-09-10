@@ -1,8 +1,9 @@
 require 'faker'
 
 count = 0
-20.times do
-  question = Question.create!( title: Faker::Hipster.word, body: Faker::Lorem.characters(255))
+
+100.times do
+  question = Question.create!( title: Faker::Hipster.words(5).join(" ") + "?", body: Faker::Hipster.paragraph(10) )
   5.times do
     answer = Answer.new content: Faker::Lorem.words.join(" ") + "?" , question_id: question.id
     answer.save!
