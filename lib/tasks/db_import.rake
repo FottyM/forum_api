@@ -10,7 +10,7 @@ namespace :db do
   desc 'inset fake contacts into db'
   task populate: :environment do
     # Avoid duplication so delete everything in from the DB
-    Rake::Task['db:drop:all'].invoke Rake::Task['db:drop:all'].invoke
+    # Rake::Task['db:drop:all'].invoke Rake::Task['db:drop:all'].invoke
     # puts 'inserting a 1000 records...'
 
     count = 0
