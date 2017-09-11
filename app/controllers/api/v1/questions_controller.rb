@@ -4,15 +4,13 @@ module Api
       before_action :set_question, only: [:show, :update, :destroy]
 
       def index
-        @questions = Question.all
+        @questions = Question.order('created_at DESC')
         render json: @questions
       end
-
 
       def show
         render json: @question
       end
-
 
       def create
         @question = Question.new(question_params)
@@ -23,7 +21,6 @@ module Api
         end
       end
 
-
       def update
         if @question.update(question_params)
           render json: @question
@@ -31,7 +28,6 @@ module Api
           render json: @question.errors, status: :unprocessable_entity
         end
       end
-
 
       def destroy
         @question.destroy
@@ -45,8 +41,7 @@ module Api
       def question_params
         params.require(:question).permit(:title, :body)
       end
+
     end
   end
 end
-
-

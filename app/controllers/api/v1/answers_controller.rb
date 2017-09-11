@@ -1,16 +1,12 @@
 module Api
   module V1
     class AnswersController < ApplicationController
-      before_action :set_answer, only: [:show, :update, :destroy]
-      before_action :set_question, except: [:show]
+      before_action :set_answer, only: [:update, :destroy]
+      before_action :set_question
 
       def index
-        @answers = @question.answers.all
-        render json: @answers, status: :ok
-      end
-
-      def show
-        render json: @answer
+        @answers = @question.answers.order('created_at ASC')
+        render json: @answers
       end
 
 
