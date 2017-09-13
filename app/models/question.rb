@@ -4,6 +4,6 @@ class Question < ApplicationRecord
   #TODO: Is this length necessary?
   # validates_length_of :body, in: 3..255
 
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
 end
