@@ -44,7 +44,7 @@ Temporary Items
 ### Rails template
 *.rbc
 capybara-*.html
-.rspec
+#.rspec
 /log
 /tmp
 /db/*.sqlite3
