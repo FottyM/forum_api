@@ -5,7 +5,7 @@ module Api
       before_action :set_question
 
       def index
-        @answers = @question.answers.order('created_at DESC')
+        @answers = @question.answers.order('updated_at DESC')
         render json: @answers
       end
 
