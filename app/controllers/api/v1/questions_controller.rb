@@ -4,7 +4,7 @@ module Api
       before_action :set_question, only: [:show, :update, :destroy]
 
       def index
-        @questions = Question.order('created_at DESC')
+        @questions = Question.order('updated_at DESC')
         render json: @questions
       end
 
