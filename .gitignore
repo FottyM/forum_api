@@ -176,3 +176,6 @@ $RECYCLE.BIN/
 .idea
 .idea/
 
+
+# Ignore application configuration
+/config/application.yml
