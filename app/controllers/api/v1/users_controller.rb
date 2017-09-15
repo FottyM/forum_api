@@ -36,8 +36,6 @@ module Api
       end
 
 
-
-
       private
 
       def set_user

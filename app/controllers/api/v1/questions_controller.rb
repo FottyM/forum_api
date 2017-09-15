@@ -6,15 +6,15 @@ module Api
 
       def index
         @questions = Question.order('updated_at DESC')
-        render json: @questions
+        render json:  @questions
       end
 
       def show
-        render json: @question
+        render json: { question: @question, author: @question.user.username }
       end
 
       def create
-        @question = Question.new(question_params)
+        @question = current_user.questions.new(question_params)
         if @question.save
           render json: @question, status: :created
         else
