@@ -36,4 +36,3 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 
 gem 'rack-cors'
 gem "figaro"
-gem 'devise'
