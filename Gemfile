@@ -36,3 +36,5 @@ gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
 
 gem 'rack-cors'
 gem "figaro"
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
