@@ -1,7 +1,8 @@
 module Api
   module V1
     class QuestionsController < ApplicationController
-      before_action :set_question, only: [:show, :update, :destroy]
+      before_action :set_question, only: [:show]
+      before_action :authenticate_request, except: [:index, :show]
 
       def index
         @questions = Question.order('updated_at DESC')
@@ -9,11 +10,11 @@ module Api
       end
 
       def show
-        render json: @question
+        render json: { question: @question, author: @question.user.username }
       end
 
       def create
-        @question = Question.new(question_params)
+        @question = current_user.questions.new(question_params)
         if @question.save
           render json: @question, status: :created
         else
@@ -22,14 +23,25 @@ module Api
       end
 
       def update
+
+        if current_user.present? && current_user.admin?
+          @question =  Question.find(params[:id])
+          puts "Here"
+        else
+          current_user.questions.find(params[:id])
+          puts "nope else instead"
+        end
+
         if @question.update(question_params)
           render json: @question
         else
           render json: @question.errors, status: :unprocessable_entity
         end
+
       end
 
       def destroy
+        @question = current_user.admin? ? Question.find(params[:id]) : current_user.questions.find(params[:id])
         @question.destroy
       end
 
