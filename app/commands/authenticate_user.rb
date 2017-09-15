@@ -8,11 +8,10 @@ class AuthenticateUser
   end
 
   def call
-    JsonWebToken.encode(user_id: user.id) if user
+    JsonWebToken.encode(user: {id: user.id, username: user.username, email: user.email, admin: user.admin } ) if user
   end
 
   private
-
   attr_accessor :email, :password
 
   def user

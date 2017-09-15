@@ -3,6 +3,7 @@ module Api
     class AnswersController < ApplicationController
       before_action :set_answer, only: [:update, :destroy]
       before_action :set_question
+      before_action :authenticate_request, except: [:index]
 
       def index
         @answers = @question.answers.order('updated_at DESC')
