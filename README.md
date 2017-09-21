@@ -1,14 +1,12 @@
-[![Build Status](https://travis-ci.com/FottyM/forum_api.svg?token=ezxbwzx4yzRF7YSKWEAV&branch=master)](https://travis-ci.com/FottyM/forum_api)
-
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/mdp/rotp/blob/master/LICENSE)
+[![Build Status](https://travis-ci.com/FottyM/forum_api.svg?token=ezxbwzx4yzRF7YSKWEAV&branch=master)](https://travis-ci.com/FottyM/forum_api) [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/mdp/rotp/blob/master/LICENSE)
 
 ### Live demo
 Live demo on => [heroku](https://tikvaa-forum-api.herokuapp.com/)
 
-##Getting Started
+## Getting Started
 + Clone the application with `git clone https://github.com/FottyM/forum_api.git` or use ssh  `git clone git@github.com:FottyM/forum_api.git`.
 
-##Dependencies
+## Dependencies
 
 * Ruby version 2.2.1 and above
 * Rails 4.0.0
@@ -48,7 +46,7 @@ Alternatively you can run our automated script by doing the following
 
 You can then run `rails s` or `rails server` and visit the page on the browser by typing `localhost:3000`. (*you can add the flag `-p <port_number>` to specify a different port number, e.i. `rails s -p 8000`*)
 
-##Running The Specs
+## Running The Specs
 After all the setting up as mentioned above, you can run the tests. The tests are driven by rspec, capybara and selenium. You can get them fired up by running the following command from the terminal.
 
   `rspec spec`
@@ -57,7 +55,7 @@ or
 
   `bundle exec rspec`
 
-##Application Main Features
+## Application Main Features
 
 * Write a question and explanations
 * Answer to questions
