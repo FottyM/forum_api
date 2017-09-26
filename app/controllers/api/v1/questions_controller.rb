@@ -23,13 +23,10 @@ module Api
       end
 
       def update
-
         if current_user.present? && current_user.admin?
           @question =  Question.find(params[:id])
-          puts "Here"
         else
-          current_user.questions.find(params[:id])
-          puts "nope else instead"
+          @question = current_user.questions.find(params[:id])
         end
 
         if @question.update(question_params)

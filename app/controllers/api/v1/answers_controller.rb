@@ -1,15 +1,12 @@
 module Api
   module V1
     class AnswersController < ApplicationController
-      # before_action :set_answer, only: [:update]
       before_action :set_question
       before_action :authenticate_request, except: [:index]
 
       def index
         @answers = @question.answers.order('updated_at DESC')
-        users_ids = @answers.pluck :user_id
-        @authors = User.find(users_ids).pluck(:username, :id)
-        render json: { answers: @answers, authors: @authors }
+        render json: { answers: @answers.map { |answer| { content: answer.content, updated_at: answer.updated_at , author: answer.user.username }  } }
       end
 
 
@@ -54,4 +51,3 @@ module Api
     end
   end
 end
-
