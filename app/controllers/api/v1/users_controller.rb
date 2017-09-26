@@ -2,7 +2,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :set_user, except: [:create, :index]
-      before_action :authenticate_request, except: [:create, :index]
+      before_action :authenticate_request, except: [:create, :index, :show]
       before_action :can_modify?, only:[:update, :destroy]
 
       def index
@@ -42,7 +42,6 @@ module Api
         else
           render json: { error: "Unauthorized action"}, status: :unauthorized
         end
-
       end
 
       private
