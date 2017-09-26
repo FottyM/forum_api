@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   before_save :capitalize_title
 
   belongs_to :user
-  has_many :answers, dependent: :destroy
+  has_many :answers, dependent: :delete_all
 
   def capitalize_title
     self.title.capitalize!
