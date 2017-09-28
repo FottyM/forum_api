@@ -6,7 +6,7 @@ module Api
 
       def index
         @questions = Question.order('updated_at DESC')
-        render json: @questions
+        render json: @questions.map { |question| question.attributes.merge( {author: question.user.username, answers_count: question.answers.count })}
       end
 
       def show
