@@ -10,7 +10,7 @@ module Api
       end
 
       def show
-        render json: { question: @question, author: @question.user.username }
+        render json: @question.attributes.merge({author: @question.user.username })
       end
 
       def create
@@ -34,7 +34,6 @@ module Api
         else
           render json: @question.errors, status: :unprocessable_entity
         end
-
       end
 
       def destroy
